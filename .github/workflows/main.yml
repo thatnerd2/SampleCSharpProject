@@ -1,5 +1,5 @@
 name: Run InferSharp PR and Fix
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   job_1:
     runs-on: ubuntu-latest
