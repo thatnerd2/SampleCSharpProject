@@ -17,6 +17,6 @@ jobs:
       - run: sudo apt-get install jq
       - run: echo "$GITHUB_REPOSITORY"
       - run: echo "$GITHUB_SHA"
-      - run: echo "$GITHUB_EVENT_PATH"
+      - run: cat $GITHUB_EVENT_PATH
       - run: echo $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
