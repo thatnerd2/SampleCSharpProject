@@ -14,5 +14,4 @@ jobs:
         id: runinfersharp
         with:
           binary-path: 'bin'
-      - name: Display SARIF
-        run: cat "infer-out/report.sarif"
+      - run: cat "infer-out/report.sarif"
