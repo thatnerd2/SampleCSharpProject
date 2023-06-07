@@ -18,5 +18,7 @@ jobs:
       - run: echo "$GITHUB_REPOSITORY"
       - run: echo "$GITHUB_SHA"
       - run: cat $GITHUB_EVENT_PATH
-      - run: echo $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      - run: echo $pull_number
+        with:
+          pull_number: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
