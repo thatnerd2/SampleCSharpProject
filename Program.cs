@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World 2");
+﻿static void Main(string[]) args)
+    {
+        var returnNull = ReturnNull();
+        _ = returnNull.Value;
+    }
+ 
+    private static NullObj ReturnNull()
+    {
+        return null;
+    }
+ 
+internal class NullObj
+{
+    internal string Value { get; set; }
+}
