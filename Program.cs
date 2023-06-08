@@ -8,7 +8,6 @@ using System.Web;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlTypes;
 using System.Xml;
-//hello
 
 public class IsDisposedBooleanField : IDisposable
 {
