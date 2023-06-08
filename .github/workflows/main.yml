@@ -15,7 +15,6 @@ jobs:
         with:
           binary-path: 'bin'
       - run: ls .
-      - run: ls ../
       - name: Run InferPR
         uses: thatnerd2/InferPRAction@main
         with:
