@@ -14,7 +14,8 @@ jobs:
         id: runinfersharp
         with:
           binary-path: 'bin'
-      - run: cat infer-out/report.sarif
+      - run: ls .
+      - run: ls ../
       - name: Run InferPR
         uses: thatnerd2/InferPRAction@main
         with:
