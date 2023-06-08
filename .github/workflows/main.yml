@@ -14,9 +14,9 @@ jobs:
         id: runinfersharp
         with:
           binary-path: 'bin'
-      - run: sudo apt-get install jq
-      - run: echo "$GITHUB_REPOSITORY"
-      - run: echo "$GITHUB_SHA"
-      - run: cat $GITHUB_EVENT_PATH
-      - run: echo "$GITHUB_TOKEN"
+      - name: Run InferPR
+        uses: thatnerd2/InferPRAction
+        with:
+          sarif_path: infer-output/report.sarif
+          github_token: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
 
