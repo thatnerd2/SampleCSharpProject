@@ -15,7 +15,7 @@ jobs:
         with:
           binary-path: 'bin'
       - name: Run InferPR
-        uses: thatnerd2/InferPRAction
+        uses: thatnerd2/InferPRAction@main
         with:
           sarif_path: infer-output/report.sarif
           github_token: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
