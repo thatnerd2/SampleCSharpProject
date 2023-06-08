@@ -14,7 +14,9 @@ jobs:
         id: runinfersharp
         with:
           binary-path: 'bin'
-      - run: echo "$GITHUB_REPOSITORY"
-      - run: echo "$GITHUB_SHA"
-      - run: echo "$GITHUB_EVENT_PATH"
+      - name: Run InferPR
+        uses: thatnerd2/InferPRAction@main
+        with:
+          sarif_path: infer-out/report.sarif
+          github_token: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
 
