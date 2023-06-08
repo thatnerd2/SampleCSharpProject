@@ -14,6 +14,7 @@ jobs:
         id: runinfersharp
         with:
           binary-path: 'bin'
+      - run: cat $GITHUB_EVENT_PATH
       - name: Run InferPR
         uses: thatnerd2/InferPRAction@main
         with:
