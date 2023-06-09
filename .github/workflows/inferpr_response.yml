@@ -8,19 +8,8 @@ jobs:
   check_review_comment:
     runs-on: ubuntu-latest
     steps:
-    - name: Check if comment is a review comment
-      id: check_comment
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        comment_url=$(jq -r ".comment.html_url" $GITHUB_EVENT_PATH)
-        if [[ $comment_url == *"/pull/"* ]]; then
-          echo "::set-output name=is_review_comment::true"
-        else
-          echo "::set-output name=is_review_comment::false"
-        fi
     - name: Run action if review comment
-      if: steps.check_comment.outputs.is_review_comment == 'true'
+      if: ${{ github.event.issue.pull_request }}
       run: |
         echo "This is a review comment, you can trigger your action here."
     - name: Run InferPRResponse
