@@ -1,7 +1,7 @@
 name: Trigger on Review Comment
 
 on:
-  issue_comment:
+  pull_request_review_comment:
     types: [created]
 
 jobs:
