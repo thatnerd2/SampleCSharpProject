@@ -1,29 +1,38 @@
-name: Run InferSharp PR Response
-on: [issue_comment]
+name: Trigger on Review Comment
+
+on:
+  issue_comment:
+    types: [created]
+
 jobs:
-  main:
+  check_review_comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      # check if comment is on a PR
-      - name: Check if PR
-        id: check_if_pr
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
-          script: |
-            const issue = context.issue;
-            const isPr = issue.hasOwnProperty('pull_request');
-            console.log(isPr);
-            return isPr;
-      - name: Run InferPRResponse
-        uses: thatnerd2/InferPRResponseAction@main
-        with:
-          comment_id: ${{ github.event.comment.id }}
-        env:
-          CPD_GITHUB_TOKEN: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_DEPLOYMENT_NAME: ${{ secrets.OPENAI_DEPLOYMENT_NAME }}
+    - name: Check if comment is a review comment
+      id: check_comment
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        comment_url=$(jq -r ".comment.html_url" $GITHUB_EVENT_PATH)
+        if [[ $comment_url == *"/pull/"* ]]; then
+          echo "::set-output name=is_review_comment::true"
+        else
+          echo "::set-output name=is_review_comment::false"
+        fi
+    - name: Run action if review comment
+      if: steps.check_comment.outputs.is_review_comment == 'true'
+      run: |
+        echo "This is a review comment, you can trigger your action here."
+        # Add your action steps here
+    - name: Run InferPRResponse
+      if: steps.check_comment.outputs.is_review_comment == 'true'
+      uses: thatnerd2/InferPRResponseAction@main
+      with:
+        comment_id: ${{ github.event.comment.id }}
+      env:
+        CPD_GITHUB_TOKEN: ${{ secrets.INFERPRACTION_GITHUB_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        OPENAI_DEPLOYMENT_NAME: ${{ secrets.OPENAI_DEPLOYMENT_NAME }}
 
 
