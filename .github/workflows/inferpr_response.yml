@@ -8,12 +8,7 @@ jobs:
   check_review_comment:
     runs-on: ubuntu-latest
     steps:
-    - name: Run action if review comment
-      if: ${{ github.event.issue.pull_request }}
-      run: |
-        echo "This is a review comment, you can trigger your action here."
     - name: Run InferPRResponse
-      if: steps.check_comment.outputs.is_review_comment == 'true'
       uses: thatnerd2/InferPRResponseAction@main
       with:
         comment_id: ${{ github.event.comment.id }}
