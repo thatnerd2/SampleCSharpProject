@@ -2,7 +2,7 @@ name: Trigger on Review Comment
 
 on:
   pull_request_review_comment:
-    types: [created, edited, modified]
+    types: [created]
 
 jobs:
   check_review_comment:
